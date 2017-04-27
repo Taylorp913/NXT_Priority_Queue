@@ -1,0 +1,12 @@
+*.lastbuildstate
+*.log
+*.tlog
+*.obj
+*.idb
+Debug/vc140.pdb
+Lab 4.pdf
+*.sdf
+*.db
+PriorityQueue.vcxproj
+*.filters
+External Files/*
