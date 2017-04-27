@@ -9,4 +9,8 @@ Lab 4.pdf
 *.db
 PriorityQueue.vcxproj
 *.filters
+build/*
 External Files/*
+kernel_cfg.c
+kernel_id.h
+implementation.oil
