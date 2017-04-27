@@ -14,3 +14,11 @@ External Files/*
 kernel_cfg.c
 kernel_id.h
 implementation.oil
+*.opendb
+appflash.sh
+*.sh
+PqTest.rxe
+PqTest_ram.bin
+*.elf
+*.map
+PqTest_rom.bin
