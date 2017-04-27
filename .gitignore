@@ -22,3 +22,4 @@ PqTest_ram.bin
 *.elf
 *.map
 PqTest_rom.bin
+*.suo

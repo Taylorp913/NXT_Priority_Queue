@@ -1,13 +1,13 @@
-#ifndef BTask_H
-#define BTask_H
+#ifndef SAFTEYTask_H
+#define SAFTEYTask_H
 
 #include "MyTask.h"
 #pragma once
 
-class BTask : public MyTask
-{	
+class SAFTEYTask : public MyTask
+{
 public:
-	BTask();
+	SAFTEYTask();
 	// run the task
 	virtual S8 run(void);
 
@@ -16,4 +16,4 @@ private:
 	U8 rxCount;
 };
 
-#endif /*BTask_H*/
+#endif /*SAFTEYTask_H*/

@@ -149,4 +149,20 @@ private:
 	DisplayStatusMsg(void);
 };
 
+class SafteyCmdMsg : public Message
+{
+public:
+	SafteyCmdMsg(TaskId::Type src, U8 seqNum, U16 runCount, TaskState::Type state, ErrorCode::Type errors, U8 lastCmdSeqNum, U8 pressed);
+
+	//private:
+	U16 runCount;				// task run count at time of update
+	U8 pressed;					// number of received messages
+	U8 lastCmdSeqNum;			// last command seq num received or sent
+	TaskState::Type state;		// task state at time of update
+	ErrorCode::Type errors;		// error code mask
+
+private:
+	SafteyCmdMsg(void);
+};
+
 #endif

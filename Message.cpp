@@ -64,3 +64,13 @@ DisplayStatusMsg::DisplayStatusMsg(TaskId::Type src, U8 seqNum, U16 runCount, Ta
 	this->errors = errors;
 }
 
+// assumes null terminated string <= MessageUpdate::MaxData
+SafteyCmdMsg::SafteyCmdMsg(TaskId::Type src, U8 seqNum, U16 runCount, TaskState::Type state, ErrorCode::Type errors, U8 lastCmdSeqNum, U8 rxCount)
+	: Message(MsgType::DisplayStatus, src, TaskId::DispTask, MsgPriority::LOW, seqNum)
+{
+	this->runCount = runCount;
+	this->lastCmdSeqNum = lastCmdSeqNum;
+	this->rxCount = rxCount;
+	this->state = state;
+	this->errors = errors;
+}
