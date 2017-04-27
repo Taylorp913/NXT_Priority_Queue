@@ -35,6 +35,13 @@ BReplyMsg::BReplyMsg(TaskId::Type src, TaskId::Type dest, U8 seqNum, S32 result)
 	this->result = result;
 }
 
+// assumes null terminated string <= MessageUpdate::MaxData
+SAFTEYcmdMsg::SAFTEYcmdMsg(TaskId::Type src, TaskId::Type dest, U8 seqNum, U8 result)
+	: Message(MsgType::BReply, src, dest, MsgPriority::HIGH, seqNum)
+{
+	this->result = result;
+}
+
 DisplayStringMsg::DisplayStringMsg(TaskId::Type src, U8 seqNum, char* msgChars, U8 numChars) 
 	: Message(MsgType::DisplayString, src, TaskId::DispTask, MsgPriority::LOW, seqNum)
 {
@@ -65,12 +72,12 @@ DisplayStatusMsg::DisplayStatusMsg(TaskId::Type src, U8 seqNum, U16 runCount, Ta
 }
 
 // assumes null terminated string <= MessageUpdate::MaxData
-SafteyCmdMsg::SafteyCmdMsg(TaskId::Type src, U8 seqNum, U16 runCount, TaskState::Type state, ErrorCode::Type errors, U8 lastCmdSeqNum, U8 rxCount)
-	: Message(MsgType::DisplayStatus, src, TaskId::DispTask, MsgPriority::LOW, seqNum)
-{
-	this->runCount = runCount;
-	this->lastCmdSeqNum = lastCmdSeqNum;
-	this->rxCount = rxCount;
-	this->state = state;
-	this->errors = errors;
-}
+//SafteyCmdMsg::SafteyCmdMsg(TaskId::Type src, U8 seqNum, U16 runCount, TaskState::Type state, ErrorCode::Type errors, U8 lastCmdSeqNum, U8 pressed)
+//	: Message(MsgType::DisplayStatus, src, TaskId::DispTask, MsgPriority::LOW, seqNum)
+//{
+//	this->runCount = runCount;
+//	this->lastCmdSeqNum = lastCmdSeqNum;
+//	this->pressed = pressed;
+//	this->state = state;
+//	this->errors = errors;
+//}

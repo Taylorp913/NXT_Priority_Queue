@@ -25,6 +25,10 @@ CPU ATMEL_AT91SAM7S256
   {
       RESOURCEPROPERTY = STANDARD;
   };
+  RESOURCE SafteyQueueResource
+  {
+      RESOURCEPROPERTY = STANDARD;
+  };
   RESOURCE DisplayQueueResource
   {
       RESOURCEPROPERTY = STANDARD;
@@ -57,6 +61,20 @@ CPU ATMEL_AT91SAM7S256
 	EVENT = BEvent;
   };
 
+    TASK SAFTEY_TASK
+  {
+    AUTOSTART = TRUE { APPMODE = appmode1; };
+    PRIORITY = 1;
+    ACTIVATION = 1;
+    SCHEDULE = FULL;
+    STACKSIZE = 512;
+	RESOURCE = AQueueResource;
+	RESOURCE = BQueueResource;
+	RESOURCE = SafteyQueueResource;
+	RESOURCE = DisplayQueueResource;
+	EVENT = SafteyEvent;
+  };
+
   //Lowest priority and displays information to the screen.
   TASK DISPLAY_TASK
   {
@@ -67,6 +85,7 @@ CPU ATMEL_AT91SAM7S256
     STACKSIZE = 512;
 	RESOURCE = AQueueResource;
 	RESOURCE = BQueueResource;
+	RESOURCE = SafteyQueueResource;
 	RESOURCE = DisplayQueueResource;
 	EVENT = DisplayEvent;
   };
@@ -103,6 +122,22 @@ CPU ATMEL_AT91SAM7S256
 		APPMODE = appmode1;
 	};
   };
+
+    ALARM SafteyAlarm100msec				
+  {
+	COUNTER = SysTimerCnt;
+	ACTION = SETEVENT 
+	{ 
+		TASK =  SAFTEY_TASK; 
+		EVENT = SafteyEvent;
+	};
+	AUTOSTART = TRUE
+	{
+		ALARMTIME = 100;
+		CYCLETIME = 100;
+		APPMODE = appmode1;
+	};
+  };
   
   ALARM DisplayAlarm400msec				
   {
@@ -135,6 +170,12 @@ CPU ATMEL_AT91SAM7S256
 	MASK = AUTO;
   };
 
+  EVENT SafteyEvent
+  {
+	MASK = AUTO;
+  };
+
+  
   COUNTER SysTimerCnt
   {
     MINCYCLE = 1;

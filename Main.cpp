@@ -4,6 +4,7 @@
 #include <cstring>
 #include "ATask.h"
 #include "BTask.h"
+#include "Saftey.h"
 #include "DisplayTask.h"
 #include "Router.h"
 using namespace std;
@@ -20,21 +21,25 @@ extern "C"
 	
 	ATask aTask;
 	BTask bTask;
+	SAFTEYTask safteyTask;
 	DisplayTask displayTask;
 
 	//declare tasks
 	DeclareTask(A_TASK);
 	DeclareTask(B_TASK);
+	DeclareTask(SAFTEY_TASK);
 	DeclareTask(DISPLAY_TASK);
 
 	//declare events
 	DeclareEvent(AEvent);
 	DeclareEvent(BEvent);
+	DeclareEvent(SafteyEvent);
 	DeclareEvent(DisplayEvent);
 	
 	//declare alarms
 	DeclareAlarm(AAlarm100msec);
 	DeclareAlarm(BAlarm100msec);
+	DeclareAlarm(SafteyAlarm100msec);
 	DeclareAlarm(DisplayAlarm400msec);
 
 	//declare counter
@@ -43,6 +48,7 @@ extern "C"
 	//declare shared variables and their resources resources
 	DeclareResource(AQueueResource);
 	DeclareResource(BQueueResource);
+	DeclareResource(SafteyQueueResource);
 	DeclareResource(DisplayQueueResource);
 	
 
@@ -97,6 +103,20 @@ extern "C"
 			bTask.run();
 		}
 		
+	}
+	//Saftey Task
+	TASK(SAFTEY_TASK)
+	{
+		safteyTask.init("SafteyTask", &router, SafteyQueueResource, TaskId::SafteyTask);
+
+		while (1)
+		{
+			WaitEvent(SafteyEvent);
+			ClearEvent(SafteyEvent);
+
+			safteyTask.run();
+		}
+
 	}
 }
 

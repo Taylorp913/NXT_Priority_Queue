@@ -30,6 +30,8 @@ S8 DisplayTask::run(void)
 		lcd.putf("s", "D: ");
 		lcd.cursor(0, TaskId::End);
 		lcd.putf("s", "Ukn:");
+		lcd.cursor(0, TaskId::SafteyTask);
+		lcd.putf("s", "S:");
 	}
 
 	// check for a new messages and process them
@@ -75,6 +77,14 @@ S8 DisplayTask::run(void)
 				err = (ErrorCode::Type)(status->errors | err);
 				break;
 			}
+		}
+		else if (mPtr->type == MsgType::SafteyMSG)
+		{
+			SAFTEYcmdMsg *status = (SAFTEYcmdMsg*)mPtr;
+			lcd.clearRow(TaskId::SafteyTask);
+			lcd.cursor(0, TaskId::SafteyTask);
+			lcd.putf("sd", "S:", status->result, 0);
+			//err = (ErrorCode::Type)(status->errors | err);
 		}
 		else
 		{

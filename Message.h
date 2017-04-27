@@ -32,7 +32,8 @@ struct MsgType {
 		BReply			 = 2,
 		DisplayString	 = 3,
 		DisplayStatus	 = 4,
-		End				 = 5
+		End				 = 5,
+		SafteyMSG		 = 6
 	} Type;
 };
 
@@ -43,7 +44,8 @@ struct TaskId {
 		ATask			 = 1,
 		BTask			 = 2,
 		DispTask		 = 3,
-		End				 = 4
+		End				 = 4,
+		SafteyTask		 = 5
 	} Type;
 };
 
@@ -117,6 +119,18 @@ private:
 	BReplyMsg(void);
 };
 
+class SAFTEYcmdMsg : public Message
+{
+public:
+	SAFTEYcmdMsg(TaskId::Type src, TaskId::Type dest, U8 seqNum, U8 result);
+
+	//private:
+	U8 result;
+
+private:
+	SAFTEYcmdMsg(void);
+};
+
 
 class DisplayStringMsg : public Message
 {
@@ -149,20 +163,20 @@ private:
 	DisplayStatusMsg(void);
 };
 
-class SafteyCmdMsg : public Message
-{
-public:
-	SafteyCmdMsg(TaskId::Type src, U8 seqNum, U16 runCount, TaskState::Type state, ErrorCode::Type errors, U8 lastCmdSeqNum, U8 pressed);
-
-	//private:
-	U16 runCount;				// task run count at time of update
-	U8 pressed;					// number of received messages
-	U8 lastCmdSeqNum;			// last command seq num received or sent
-	TaskState::Type state;		// task state at time of update
-	ErrorCode::Type errors;		// error code mask
-
-private:
-	SafteyCmdMsg(void);
-};
+//class SafteyCmdMsg : public Message
+//{
+//public:
+//	SafteyCmdMsg(TaskId::Type src, U8 seqNum, U16 runCount, TaskState::Type state, ErrorCode::Type errors, U8 lastCmdSeqNum, U8 pressed);
+//
+//	//private:
+//	U16 runCount;				// task run count at time of update
+//	U8 pressed;					// number of received messages
+//	U8 lastCmdSeqNum;			// last command seq num received or sent
+//	TaskState::Type state;		// task state at time of update
+//	ErrorCode::Type errors;		// error code mask
+//
+//private:
+//	SafteyCmdMsg(void);
+//};
 
 #endif

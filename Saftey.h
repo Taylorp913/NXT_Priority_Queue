@@ -14,6 +14,7 @@ public:
 private:
 	U8 lastSeqNum;
 	U8 rxCount;
+	U8 buttonPressed;
 };
 
 #endif /*SAFTEYTask_H*/

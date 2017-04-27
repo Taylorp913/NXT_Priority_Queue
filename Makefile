@@ -10,6 +10,7 @@ TARGET_CPP_SOURCES = \
 	 ATask.cpp \
 	 BTask.cpp \
 	 DisplayTask.cpp \
+	 Saftey.cpp \
 	 Main.cpp
 	
 
