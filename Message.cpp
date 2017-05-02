@@ -37,7 +37,7 @@ BReplyMsg::BReplyMsg(TaskId::Type src, TaskId::Type dest, U8 seqNum, S32 result)
 
 // assumes null terminated string <= MessageUpdate::MaxData
 SAFTEYcmdMsg::SAFTEYcmdMsg(TaskId::Type src, TaskId::Type dest, U8 seqNum, U8 result)
-	: Message(MsgType::BReply, src, dest, MsgPriority::HIGH, seqNum)
+	: Message(MsgType::SafteyMSG, src, dest, MsgPriority::HIGH, seqNum)
 {
 	this->result = result;
 }

@@ -9,8 +9,8 @@ ecrobot::Lcd lcd;
 // 0: "Prio example---"
 // 1: "ATask: <state> <cnt>"
 // 2: "BTask: <state> <cnt>"
-// 3: "---------------"
-// 4: "---------------"
+// 3: "D:"
+// 4: "Ukn:5:2"
 // 5: "---------------"
 // 6: "LastErr: <errCode>"
 
@@ -30,7 +30,7 @@ S8 DisplayTask::run(void)
 		lcd.putf("s", "D: ");
 		lcd.cursor(0, TaskId::End);
 		lcd.putf("s", "Ukn:");
-		lcd.cursor(0, TaskId::SafteyTask);
+		lcd.cursor(0, TaskId::SafteyTask-1);
 		lcd.putf("s", "S:");
 	}
 
@@ -81,8 +81,8 @@ S8 DisplayTask::run(void)
 		else if (mPtr->type == MsgType::SafteyMSG)
 		{
 			SAFTEYcmdMsg *status = (SAFTEYcmdMsg*)mPtr;
-			lcd.clearRow(TaskId::SafteyTask);
-			lcd.cursor(0, TaskId::SafteyTask);
+			lcd.clearRow(TaskId::SafteyTask-1);
+			lcd.cursor(0, TaskId::SafteyTask-1);
 			lcd.putf("sd", "S:", status->result, 0);
 			//err = (ErrorCode::Type)(status->errors | err);
 		}

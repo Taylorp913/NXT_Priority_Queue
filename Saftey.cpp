@@ -20,30 +20,30 @@ S8 SAFTEYTask::run(void)
 	TouchSensorStatus = ecrobot_get_touch_sensor(NXT_PORT_S1);
 
 
-	if (TouchSensorStatus == 1 && TouchSensorStatus_old == 0) 
-	{
-		buttonPressed = 0;
-	}
-	else if(TouchSensorStatus ==0 && TouchSensorStatus_old ==1)
-	{
-		buttonPressed = 1;
-	}
-	else
-	{	
-		buttonPressed = 0;
-	}
-	TouchSensorStatus_old = TouchSensorStatus;
+	//if (TouchSensorStatus == 1 && TouchSensorStatus_old == 0) 
+	//{
+	//	buttonPressed = 0;
+	//}
+	//else if(TouchSensorStatus ==0 && TouchSensorStatus_old ==1)
+	//{
+	//	buttonPressed = 1;
+	//}
+	//else
+	//{	
+	//	buttonPressed = 0;
+	//}
+	//TouchSensorStatus_old = TouchSensorStatus;
 	
 	
-	SAFTEYcmdMsg* m = new SAFTEYcmdMsg(TaskId::SafteyTask, TaskId::BTask, this->lastSeqNum, buttonPressed);
-	errCode = router->SendMessage(m);
-	if (errCode != ErrorCode::None)
-	{
-		// what should you do if you cant send a message ?
-		delete m;	// free the storage
-	}
+	//SAFTEYcmdMsg* m = new SAFTEYcmdMsg(TaskId::SafteyTask, TaskId::BTask, this->lastSeqNum, buttonPressed);
+	//errCode = router->SendMessage(m);
+	//if (errCode != ErrorCode::None)
+	//{
+	//	// what should you do if you cant send a message ?
+	//	delete m;	// free the storage
+	//}
 
-	SAFTEYcmdMsg* n = new SAFTEYcmdMsg(TaskId::SafteyTask, TaskId::DispTask, this->lastSeqNum, buttonPressed);
+	SAFTEYcmdMsg* n = new SAFTEYcmdMsg(TaskId::SafteyTask, TaskId::DispTask, this->lastSeqNum, TouchSensorStatus);//buttonPressed);
 	errCode = router->SendMessage(n);
 	if (errCode != ErrorCode::None)
 	{
@@ -53,5 +53,5 @@ S8 SAFTEYTask::run(void)
 
 
 	return 0;
-}
+} 
 

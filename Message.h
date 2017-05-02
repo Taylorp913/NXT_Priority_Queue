@@ -45,7 +45,7 @@ struct TaskId {
 		BTask			 = 2,
 		DispTask		 = 3,
 		End				 = 4,
-		SafteyTask		 = 5
+		SafteyTask		 = 6
 	} Type;
 };
 
