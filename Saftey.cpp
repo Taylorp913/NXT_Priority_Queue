@@ -34,14 +34,19 @@ S8 SAFTEYTask::run(void)
 	//}
 	//TouchSensorStatus_old = TouchSensorStatus;
 	
+
+	if (TouchSensorStatus == 1 && TouchSensorStatus_old == 0) 
+	{
+		SAFTEYcmdMsg* m = new SAFTEYcmdMsg(TaskId::SafteyTask, TaskId::BTask, this->lastSeqNum, TouchSensorStatus);
+		errCode = router->SendMessage(m);
+		if (errCode != ErrorCode::None)
+		{
+			// what should you do if you cant send a message ?
+			delete m;	// free the storage
+		}
+	}
 	
-	//SAFTEYcmdMsg* m = new SAFTEYcmdMsg(TaskId::SafteyTask, TaskId::BTask, this->lastSeqNum, buttonPressed);
-	//errCode = router->SendMessage(m);
-	//if (errCode != ErrorCode::None)
-	//{
-	//	// what should you do if you cant send a message ?
-	//	delete m;	// free the storage
-	//}
+	TouchSensorStatus_old = TouchSensorStatus;
 
 	SAFTEYcmdMsg* n = new SAFTEYcmdMsg(TaskId::SafteyTask, TaskId::DispTask, this->lastSeqNum, TouchSensorStatus);//buttonPressed);
 	errCode = router->SendMessage(n);

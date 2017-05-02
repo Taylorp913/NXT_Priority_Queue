@@ -44,6 +44,14 @@ S8 BTask::run(void)
 				errCode = (ErrorCode::Type)(errCode | sendErr);
 			}
 		}
+		else if (mPtr->type == MsgType::SafteyMSG)
+		{
+			//here I would perfrom the needed STOP logic. FOr now, it just changes the state of the task.
+			if (state == TaskState::Running) state = TaskState::Dead;
+			else if (state == TaskState::Dead) state = TaskState::Running;
+			else state = TaskState::Ukn;
+
+		}
 		else
 		{
 			// should not be receiving any other message types
